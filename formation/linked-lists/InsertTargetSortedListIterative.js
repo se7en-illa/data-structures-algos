@@ -32,17 +32,36 @@ class ListNode {
 
 function arrayify(head) {
   let array = [];
+  let dummy = head;
 
-  while (head != null) {
-    array.push(head.value);
-    head = head.next;
+  while (dummy != null) {
+    array.push(dummy.value);
+    dummy = dummy.next;
   }
+
   return array;
 }
 
+// O(N) time
 function insert(head, target) {
-  // Write your code here.
-  return new ListNode();
+  if (!head) return new ListNode(target);
+
+  let dummy = new ListNode(0);
+  dummy.next = head;
+  let node = dummy;
+
+  while (node) {
+    if (!node.next || target < node.next.value) {
+      const next = node.next;
+      node.next = new ListNode(target);
+      node.next.next = next;
+      break;
+    }
+
+    node = node.next;
+  }
+
+  return dummy.next;
 }
 
 // 🧪 VERIFY Run tests. Methodically debug & analyze issues.

@@ -72,3 +72,47 @@ console.log(arrayify(insert(LL1, 2))); // [1, 2, 3, 4]
 console.log(arrayify(insert(LL2, -4))); // [-4, -3, -2, -1]
 console.log(arrayify(insert(LL2, 0))); // [-3, -2, -1, 0]
 console.log(arrayify(insert(null, 1))); // [1]
+
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+function insertIntoSortedLinkedList(head, target) {
+  const newNode = new Node(target);
+
+  if (!head) {
+    return newNode;
+  }
+
+  let prev = null;
+  let curr = head;
+
+  while (curr) {
+    if (target <= curr.val) {
+      if (!prev) {
+        newNode.next = curr;
+        return newNode;
+      } else {
+        prev.next = newNode;
+        newNode.next = curr;
+        return head;
+      }
+    }
+
+    prev = curr;
+    curr = curr.next;
+  }
+
+  prev.next = newNode;
+  return head;
+}
+
+const head = new Node(1);
+head.next = new Node(3);
+head.next.next = new Node(4);
+
+console.log(insertIntoSortedLinkedList(head, 2));
+// Output: Node { val: 1, next: Node { val: 2, next: Node { val: 3, next: Node { val: 4, next: null } } } }

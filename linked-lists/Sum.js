@@ -41,3 +41,29 @@ var LL1 = new ListNode(1, new ListNode(4, new ListNode(5)));
 console.log(sum(null)); // 0
 console.log(sum(LL1)); // 10
 console.log(sum(new ListNode(1))); // 1
+
+function reduce(head, accumulator, initialVal) {}
+
+class Node {
+  constructor(value = 0, next = null) {
+    this.value = value;
+    this.next = next;
+  }
+}
+
+function filter(head, test) {
+  if (!head) return null;
+
+  let dummy = new Node(0, head);
+  let curr = dummy;
+  if (!test(curr.value)) curr = curr.next;
+
+  while (curr) {
+    if (!test(curr.next.value)) {
+      curr.next = curr.next.next;
+    }
+    curr = curr.next;
+  }
+
+  return dummy.next;
+}

@@ -4,7 +4,6 @@ Print all K-length binary strings without consecutive 1s
 
 Given an integer *maxLen*, print all binary strings of size *maxLen* that don't have 1s next to each other. That is, no string should contain the substring 11, 111, 1111, 11111, etc. You can assume *maxLen* > 0.
  
-
 EXAMPLE(S)
 printBinaryWithoutConsecutive1s(maxLen=2)
 00
@@ -108,46 +107,46 @@ def printBinaryWithoutConsecutive1s(maxLen: int) -> None:
 # Test Cases
 print("======= Test Case 1")
 printBinaryWithoutConsecutive1s(maxLen=1)
-#0
-#1
+# 0
+# 1
 
 print("======= Test Case 2")
 printBinaryWithoutConsecutive1s(maxLen=2)
-#00
-#01
-#10
+# 00
+# 01
+# 10
 
 print("======= Test Case 3")
 printBinaryWithoutConsecutive1s(maxLen=3)
-#000
-#001
-#010
-#100
-#101
+# 000
+# 001
+# 010
+# 100
+# 101
 
 print("======= Test Case 4")
 printBinaryWithoutConsecutive1s(maxLen=4)
-#0000
-#0001
-#0010
-#0100
-#0101
-#1000
-#1001
-#1010
+# 0000
+# 0001
+# 0010
+# 0100
+# 0101
+# 1000
+# 1001
+# 1010
 
 print("======= Test Case 5")
 printBinaryWithoutConsecutive1s(maxLen=5)
-#00000
-#00001
-#00010
-#00100
-#00101
-#01000
-#01001
-#01010
-#10000
-#10001
-#10010
-#10100
-#10101
+# 00000
+# 00001
+# 00010
+# 00100
+# 00101
+# 01000
+# 01001
+# 01010
+# 10000
+# 10001
+# 10010
+# 10100
+# 10101

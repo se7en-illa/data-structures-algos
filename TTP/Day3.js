@@ -1,147 +1,170 @@
-class ListNode {
-  constructor(value, next) {
-    this.value = value;
-    this.next = null;
-  }
-}
-
-function generateList(array) {
-  if (array.length === 0) return null;
-
-  let head = new ListNode(array[0]);
-
-  let current = head;
-  for (let i = 1; i < array.length; i++) {
-    current.next = new ListNode(array[i]);
-    current = current.next;
-  }
-  return head;
-}
-
-let array = [1, 5, 7, 10];
-let linkedList = generateList(array);
-//console.log(linkedList);
-
-/* Let's use the following LinkedList:
-  
-    1 --> 5 --> 7 --> 10 --> null
-    
-  */
-//----------------------------------------------------
 /*
-  1. Print Forward:
-  Write a function that prints all values of the LinkedList in a forward-order
-  */
-// function printForward(current) {
-//  while(current!==null) { //Time: O(N)
-//     console.log(current.value);
-//     current = current.next;
+1. Factorial - the product of all positive integers less than or equal to a given positive integer and denoted by that integer and an exclamation point.
+
+Given an integer, n, write a function that produces it's factorial value.
+
+Example 1:
+  Input: n = 3
+  Output: 26
+  Explanation: 3 * 2 * 1 = 6
+  
+Example 2:
+  Input: n = 4
+  Output: 24
+  Explanation: 4 * 3 * 2 * 1 = 24
+
+Example 3: 
+  Input: n = 5
+  Output: 120
+  Explanation: 5 * 4 * 3 * 2 * 1 = 120
+*/
+
+// result variable
+// decrement n
+
+function factorial(n) {
+  if (n === 1) {
+    return 1;
+  }
+  return n * factorial(n - 1);
+}
+
+const factorialRefactor = (n) => (n === 1 ? 1 : n * factorialRefactor(n - 1));
+
+console.table([factorialRefactor(4), factorialRefactor(5)]);
+
+/* Time Complexity:
+   Space Complexity:
+*/
+
+/*
+2. Fibonacci - a sequence such that each number is the sum of the two numbers preceding it. 
+
+The Fibonacci sequence goes as follows:
+1, 1, 2, 3, 5, 8, 13, 21, ... and so on
+
+At the 0 index, we assign value of 1.
+At the 1 index, we assign value of 1.
+At the 2 index, 2 is the sum of 1 and 1, so the Fibonacci number of 2 is 2.
+At the 3 index, 3 is the sum of 2 and 1, so the Fibonacci number of 3 is 3.
+At the 4 index, 5 is the sum of 3 and 2, so the Fibonacci number of 4 is 5.
+At the 5 index, 8 is the sum of 5 and 3, so the Fibonacci number of 5 is 8.
+At the 6 index, 13 is the sum of 8 and 5, so the Fibonacci number of 6 is 13.
+At the 7 index, 21 is the sum of 13 and 8, so the Fibonacci number of 7 is 21.
+
+Given an integer, n, write a function that produces it's Fibonacci number.
+
+Example 1:
+  Input: n = 5
+  Output: 8
+  
+Example 2:
+  Input: n = 6
+  Output: 24
+
+Example 3: 
+  Input: n = 15
+  Output: 610
+*/
+
+// base case, return 1
+function fib(n) {
+  if (n === 1 || n === 0) {
+    return 1;
+  }
+
+  return fib(n - 1) + fib(n - 2);
+}
+
+console.table([
+  fib(5), // 8
+  fib(7), // 21
+  fib(4),
+  fib(6),
+]);
+
+/* Time Complexity:
+   Space Complexity:
+*/
+
+/*
+3. Integer Replacement:
+
+Given a positive integer n, you can apply one of the following operations:
+
+If n is divisible by 3, replace n with n / 3.
+If n is divisible by 2, replace n with n / 2.
+Otherwise, replace n with n - 1.
+
+Write a function that returns the minimum number of steps needed for n to become 1.
+
+Example 1:
+  Input: n = 5
+  Output: 3
+  
+Example 2:
+  Input: n = 10
+  Output: 3
+
+Example 3:
+  Input: n = 30
+  Output: 4
+*/
+
+/*
+  10 +1
+  5  +1
+  4  +1
+  2  +1
+  3
+  
+  30 +1
+  10 +1
+  5 +1
+  4 +1
+  2 +1
+  1
+  
+*/
+
+function minSteps(n, min = 0) {
+  if (n === 1) return min;
+
+  if (n % 3 === 0) {
+    return minSteps(n / 3, min + 1);
+  }
+
+  if (n % 2 === 0) {
+    return minSteps(n / 2, min + 1);
+  }
+
+  return minSteps(n - 1, min + 1);
+}
+
+console.table([
+  minSteps(5), // 3
+  minSteps(10), // 4
+  minSteps(30), // 4
+]);
+
+// function minStepsRecursive(n) {
+//   if(n === 1) return 0;
+
+//   if(n % 3 === 0){
+//     return 1 + minStepsRecursive(n/3)
+//   } else if (n % 2 === 0) {
+//     return 1 + minStepsRecursive(n/2)
+//   } else {
+//     return 1 + minStepsRecursive(n - 1)
 //   }
 // }
-// console.log("Forward:");
-// printForward(linkedList);
-/*
-  Time Complexity: O(N), N = number of nodes in LinkedList
-  Space Complexity: O(1), nothing new created based on input size
-  */
 
-/*
-  2. Print Backward:
-  Write a function that prints all values of the LinkedList in a backward-order
-  */
-//function printBackward(current) { //Time: O(N)
-// if (current === null) return;
-//   printBackward(current.next);
-//   console.log(current.value);
-// }
-// console.log("Backward:");
-// printBackward(linkedList);
-/*
-  Time Complexity: O(N), N = number of nodes in LinkedList
-  Space Complexity: O(N), We create a call stack based on input size
-  */
+// console.table([
+//   minStepsRecursive(5), // 3
+//   minStepsRecursive(10), // 3
+//   minStepsRecursive(30) // 4
+// ])
 
-/*
-  3. Reverse:
-  Write a function that reverses the Linked List in-place.
-  Output: 10 --> 7 --> 5 --> 1 --> null
-  */
-
-function reverse(head) {
-  let current = head;
-  let previous = null;
-  // current
-  let next = current.next;
-
-  // null<-- 1 --> 5 --> 7 --> 10 --> null
-
-  while (current) {
-    let next = current.next;
-    current.next = previous; // sets the next value of the current node to previous node
-    previous = current; // points the variable previous to the current node
-    current = next; // moves to the next node in the linked list
-  }
-  return previous;
-}
-
-// console.log(reverse(linkedList));
-
-/*
-  Time Complexity: O(N)
-  Space Complexity: O(1)
-  */
-
-/*
-  4. Merge Two Sorted Lists:
-     Merge two sorted lists and return head of the merged list
-     Given the following Lists:
-  
-     List 1: 1 --> 2 --> 4 --> null
-     List 2: 0 --> 3 --> 4 --> null
-  
-     Answer: 0 --> 1 --> 2 --> 3 --> 4 --> 4 --> null
-  */
-
-function arrayify(head) {
-  let array = [];
-  let dummy = head;
-
-  while (dummy != null) {
-    array.push(dummy.value);
-    dummy = dummy.next;
-  }
-
-  return array;
-}
-
-function mergeTwoLists(head1, head2) {
-  let temp = new ListNode(0, null);
-  let current = temp;
-
-  while (head1 && head2) {
-    if (head1.value < head2.value) {
-      current.next = head1;
-      head1 = head1.next;
-    } else {
-      current.next = head2;
-      head2 = head2.next;
-    }
-    current = current.next;
-  }
-
-  if (head1) {
-    current.next = head1;
-  } else {
-    current.next = head2;
-  }
-
-  return temp.next;
-}
-
-let l1 = generateList([0, 1, 4, 20]);
-let l2 = generateList([1, 3, 4, 10]);
-console.log(arrayify(mergeTwoLists(l1, l2)));
-/*
-  Time Complexity: 
-  Space Complexity:
-  */
+/* Time Complexity:
+   Space Complexity:
+*/

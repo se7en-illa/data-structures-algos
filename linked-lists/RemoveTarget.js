@@ -88,3 +88,13 @@ console.log(arrayify(LL1)); // []
 // NOTE: If you're removing the head node, you need to reassign LL1 or it will still point to the old head!
 
 // recursive functions are linear space bc the function is called repeatedly
+
+function solution(list, target) {
+  if (!list) return null;
+
+  if (list.value === target) return solution(list.next, target);
+
+  list.next = solution(list.next, target);
+
+  return list;
+}
